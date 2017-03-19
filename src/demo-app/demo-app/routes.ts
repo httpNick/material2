@@ -32,6 +32,7 @@ import {TABS_DEMO_ROUTES} from '../tabs/routes';
 import {PlatformDemo} from '../platform/platform-demo';
 import {AutocompleteDemo} from '../autocomplete/autocomplete-demo';
 import {InputDemo} from '../input/input-demo';
+import {ExpansionPanelDemo} from '../expansion-panel/expansion-panel-demo';
 import {StyleDemo} from '../style/style-demo';
 
 export const DEMO_APP_ROUTES: Routes = [
@@ -52,6 +53,7 @@ export const DEMO_APP_ROUTES: Routes = [
   {path: 'overlay', component: OverlayDemo},
   {path: 'checkbox', component: CheckboxDemo},
   {path: 'input', component: InputDemo},
+  {path: 'expansion-panel', component: ExpansionPanelDemo},
   {path: 'toolbar', component: ToolbarDemo},
   {path: 'icon', component: IconDemo},
   {path: 'list', component: ListDemo},

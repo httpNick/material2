@@ -42,6 +42,7 @@ import {ProjectionDemo, ProjectionTestComponent} from './projection/projection-d
 import {PlatformDemo} from './platform/platform-demo';
 import {AutocompleteDemo} from './autocomplete/autocomplete-demo';
 import {InputDemo} from './input/input-demo';
+import {ExpansionPanelDemo} from './expansion-panel/expansion-panel-demo';
 import {StyleDemo} from './style/style-demo';
 
 @NgModule({
@@ -69,6 +70,7 @@ import {StyleDemo} from './style/style-demo';
     Home,
     IconDemo,
     InputDemo,
+    ExpansionPanelDemo,
     JazzDialog,
     ContentElementDialog,
     IFrameDialog,

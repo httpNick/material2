@@ -659,6 +659,7 @@ $mat-light-theme-background: (
   selected-button: map_get($mat-grey, 300),
   selected-disabled-button: map_get($mat-grey, 400),
   disabled-button-toggle: map_get($mat-grey, 200),
+  expansion-panel: white,
 );
 
 // Background palette for dark themes.
@@ -675,6 +676,7 @@ $mat-dark-theme-background: (
   selected-button: map_get($mat-grey, 900),
   selected-disabled-button: map_get($mat-grey, 800),
   disabled-button-toggle: map_get($mat-grey, 1000),
+  expansion-panel:  map_get($mat-grey, 800)
 );
 
 // Foreground palette for light themes.
@@ -689,7 +691,8 @@ $mat-light-theme-foreground: (
   secondary-text:  rgba(black, 0.54),
   icon:            rgba(black, 0.54),
   icons:           rgba(black, 0.54),
-  text:            rgba(black, 0.87)
+  text:            rgba(black, 0.87),
+  expansion-panel: $black-87-opacity,
 );
 
 // Foreground palette for dark themes.
@@ -704,5 +707,6 @@ $mat-dark-theme-foreground: (
   secondary-text:  rgba(white, 0.7),
   icon:            white,
   icons:           white,
-  text:            white
+  text:            white,
+  expansion-panel: $white-12-opacity
 );

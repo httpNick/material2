@@ -8,6 +8,7 @@ export * from './card/index';
 export * from './chips/index';
 export * from './checkbox/index';
 export * from './dialog/index';
+export * from './expansion-panel/index';
 export * from './grid-list/index';
 export * from './icon/index';
 export * from './input/index';

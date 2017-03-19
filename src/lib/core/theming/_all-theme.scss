@@ -7,6 +7,7 @@
 @import '../../checkbox/checkbox-theme';
 @import '../../chips/chips-theme';
 @import '../../dialog/dialog-theme';
+@import '../../expansion-panel/expansion-panel-theme';
 @import '../../grid-list/grid-list-theme';
 @import '../../icon/icon-theme';
 @import '../../input/input-theme';
@@ -34,6 +35,7 @@
   @include mat-checkbox-theme($theme);
   @include mat-chips-theme($theme);
   @include mat-dialog-theme($theme);
+  @include mat-expansion-panel-theme($theme);
   @include mat-grid-list-theme($theme);
   @include mat-icon-theme($theme);
   @include mat-input-theme($theme);

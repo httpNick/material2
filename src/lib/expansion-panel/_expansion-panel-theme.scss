@@ -1,0 +1,17 @@
+@import '../core/theming/palette';
+@import '../core/theming/theming';
+
+@mixin mat-expansion-panel-theme($theme) {
+  $accent: map-get($theme, accent);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+  $is-dark-theme: map-get($theme, is-dark);
+  $primary: map-get($theme, primary);
+  $warn: map-get($theme, warn);
+
+  .mat-expansion-panel {
+    background-color: mat-color($background, expansion-panel);
+    color: mat-color($foreground, expansion-panel);
+  }
+
+}
