@@ -13,6 +13,14 @@ import {
 })
 export class MdExpansionPanelListContent {}
 
+@Directive({
+  selector: 'md-expansion-panel-secondary-content, mat-expansion-panel-secondary-content',
+  host: {
+    '[class.mat-expansion-panel-secondary-content]': 'true'
+  }
+})
+export class MdExpansionPanelSecondaryContent {}
+
 @Component({
   moduleId: module.id,
   selector: 'md-expansion-panel, mat-expansion-panel',

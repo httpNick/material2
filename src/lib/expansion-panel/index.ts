@@ -2,7 +2,8 @@ import {  ModuleWithProviders, NgModule} from '@angular/core';
 
 import {
   MdExpansionPanel,
-  MdExpansionPanelListContent
+  MdExpansionPanelListContent,
+  MdExpansionPanelSecondaryContent
 } from './expansion-panel';
 import { CompatibilityModule } from '../core';
 
@@ -11,10 +12,13 @@ import { CompatibilityModule } from '../core';
   exports: [
     CompatibilityModule,
     MdExpansionPanel,
-    MdExpansionPanelListContent
+    MdExpansionPanelListContent,
+    MdExpansionPanelSecondaryContent
   ],
   declarations: [
-    MdExpansionPanel, MdExpansionPanelListContent
+    MdExpansionPanel,
+    MdExpansionPanelListContent,
+    MdExpansionPanelSecondaryContent
   ],
 })
 export class MdExpansionPanelModule {

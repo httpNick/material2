@@ -8,6 +8,8 @@
 
 $black-87-opacity: rgba(black, 0.87);
 $white-87-opacity: rgba(white, 0.87);
+$black-54-opacity: rgba(black, 0.54);
+$white-54-opacity: rgba(white, 0.54);
 $black-12-opacity: rgba(black, 0.12);
 $white-12-opacity: rgba(white, 0.12);
 $black-6-opacity: rgba(black, 0.06);
@@ -693,6 +695,7 @@ $mat-light-theme-foreground: (
   icons:           rgba(black, 0.54),
   text:            rgba(black, 0.87),
   expansion-panel: $black-87-opacity,
+  expansion-panel-secondary: $black-54-opacity,
 );
 
 // Foreground palette for dark themes.
@@ -708,5 +711,6 @@ $mat-dark-theme-foreground: (
   icon:            white,
   icons:           white,
   text:            white,
-  expansion-panel: $white-12-opacity
+  expansion-panel: $white-12-opacity,
+  expansion-panel-secondary: $white-54-opacity,
 );

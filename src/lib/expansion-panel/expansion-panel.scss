@@ -1,11 +1,12 @@
 @import '../core/style/variables';
 @import '../core/style/elevation';
 
-$mat-expansion-panel-list-content-horiz-padding: 24px;
 $mat-expansion-panel-list-content-font-size: 15px;
-$mat-expansion-panel-list-content-vert-padding: 16px;
+$mat-expansion-panel-secondary-content-font-size: 12px;
 $mat-expansion-panel-border-radius: 2px;
-$mat-expansion-panel-width = 500px;
+$mat-expansion-panel-width: 500px;
+$mat-expansion-panel-horizontal-padding: 24px;
+$mat-expansion-panel-vertical-padding: 12px;
 
 .mat-expansion-panel {
   @include mat-elevation(2);
@@ -14,11 +15,25 @@ $mat-expansion-panel-width = 500px;
   border-radius: $mat-expansion-panel-border-radius;
   display: flex;
   position: relative;
+  align-items: center;
+  justify-content: space-between;
+  padding: $mat-expansion-panel-vertical-padding $mat-expansion-panel-horizontal-padding;
+
 }
 
 .mat-expansion-panel-list-content {
-  padding:
-          $mat-expansion-panel-list-content-vert-padding 0
-          $mat-expansion-panel-list-content-vert-padding $mat-expansion-panel-list-content-horiz-padding;
   font-size: $mat-expansion-panel-list-content-font-size;
+}
+
+.mat-expansion-panel-secondary-content {
+  font-size: $mat-expansion-panel-secondary-content-font-size;
+}
+
+.expansion {
+
+  &.column {
+    display: flex;
+    flex-direction: column;
+  }
+
 }
