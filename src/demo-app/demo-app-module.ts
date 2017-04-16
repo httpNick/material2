@@ -2,8 +2,9 @@ import {NgModule, ApplicationRef} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {HttpModule} from '@angular/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {DemoApp, Home} from './demo-app/demo-app';
 import {RouterModule} from '@angular/router';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {DemoApp, Home} from './demo-app/demo-app';
 import {
   MaterialModule,
   OverlayContainer,
@@ -38,16 +39,17 @@ import {SnackBarDemo} from './snack-bar/snack-bar-demo';
 import {PortalDemo, ScienceJoke} from './portal/portal-demo';
 import {MenuDemo} from './menu/menu-demo';
 import {TabsDemo, SunnyTabContent, RainyTabContent, FoggyTabContent} from './tabs/tabs-demo';
-import {ProjectionDemo, ProjectionTestComponent} from './projection/projection-demo';
 import {PlatformDemo} from './platform/platform-demo';
 import {AutocompleteDemo} from './autocomplete/autocomplete-demo';
 import {InputDemo} from './input/input-demo';
 import {ExpansionPanelDemo} from './expansion-panel/expansion-panel-demo';
 import {StyleDemo} from './style/style-demo';
 
+
 @NgModule({
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     HttpModule,
     ReactiveFormsModule,
@@ -83,8 +85,6 @@ import {StyleDemo} from './style/style-demo';
     PortalDemo,
     ProgressBarDemo,
     ProgressSpinnerDemo,
-    ProjectionDemo,
-    ProjectionTestComponent,
     RadioDemo,
     RippleDemo,
     RotiniPanel,

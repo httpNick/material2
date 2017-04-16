@@ -15,11 +15,11 @@ import {
 } from '@angular/core';
 import {NG_VALUE_ACCESSOR, ControlValueAccessor} from '@angular/forms';
 import {coerceBooleanProperty} from '../core/coercion/boolean-property';
-import {Subscription} from 'rxjs/Subscription';
 import {
   MdRipple,
   RippleRef,
   FocusOriginMonitor,
+  FocusOrigin,
 } from '../core';
 
 
@@ -183,10 +183,7 @@ export class MdCheckbox implements ControlValueAccessor, AfterViewInit, OnDestro
   private _controlValueAccessorChangeFn: (value: any) => void = (value) => {};
 
   /** Reference to the focused state ripple. */
-  private _focusedRipple: RippleRef;
-
-  /** Reference to the focus origin monitor subscription. */
-  private _focusedSubscription: Subscription;
+  private _focusRipple: RippleRef;
 
   constructor(private _renderer: Renderer,
               private _elementRef: ElementRef,
@@ -196,22 +193,13 @@ export class MdCheckbox implements ControlValueAccessor, AfterViewInit, OnDestro
   }
 
   ngAfterViewInit() {
-    this._focusedSubscription = this._focusOriginMonitor
+    this._focusOriginMonitor
       .monitor(this._inputElement.nativeElement, this._renderer, false)
-      .subscribe(focusOrigin => {
-        if (!this._focusedRipple && focusOrigin === 'keyboard') {
-          this._focusedRipple = this._ripple.launch(0, 0, { persistent: true, centered: true });
-        }
-      });
+      .subscribe(focusOrigin => this._onInputFocusChange(focusOrigin));
   }
 
   ngOnDestroy() {
-    this._focusOriginMonitor.unmonitor(this._inputElement.nativeElement);
-
-    if (this._focusedSubscription) {
-      this._focusedSubscription.unsubscribe();
-      this._focusedSubscription = null;
-    }
+    this._focusOriginMonitor.stopMonitoring(this._inputElement.nativeElement);
   }
 
   /**
@@ -225,8 +213,10 @@ export class MdCheckbox implements ControlValueAccessor, AfterViewInit, OnDestro
   set checked(checked: boolean) {
     if (checked != this.checked) {
       if (this._indeterminate) {
-        this._indeterminate = false;
-        this.indeterminateChange.emit(this._indeterminate);
+        Promise.resolve().then(() => {
+          this._indeterminate = false;
+          this.indeterminateChange.emit(this._indeterminate);
+        });
       }
       this._checked = checked;
       this._changeDetectorRef.markForCheck();
@@ -314,6 +304,7 @@ export class MdCheckbox implements ControlValueAccessor, AfterViewInit, OnDestro
    */
   setDisabledState(isDisabled: boolean) {
     this.disabled = isDisabled;
+    this._changeDetectorRef.markForCheck();
   }
 
   private _transitionCheckState(newState: TransitionCheckState) {
@@ -346,10 +337,14 @@ export class MdCheckbox implements ControlValueAccessor, AfterViewInit, OnDestro
     this.change.emit(event);
   }
 
-  /** Informs the component when we lose focus in order to style accordingly */
-  _onInputBlur() {
-    this._removeFocusedRipple();
-    this.onTouched();
+  /** Function is called whenever the focus changes for the input element. */
+  private _onInputFocusChange(focusOrigin: FocusOrigin) {
+    if (!this._focusRipple && focusOrigin === 'keyboard') {
+      this._focusRipple = this._ripple.launch(0, 0, {persistent: true, centered: true});
+    } else if (!focusOrigin) {
+      this._removeFocusRipple();
+      this.onTouched();
+    }
   }
 
   /** Toggles the `checked` state of the checkbox. */
@@ -374,7 +369,7 @@ export class MdCheckbox implements ControlValueAccessor, AfterViewInit, OnDestro
     // Preventing bubbling for the second event will solve that issue.
     event.stopPropagation();
 
-    this._removeFocusedRipple();
+    this._removeFocusRipple();
 
     if (!this.disabled) {
       this.toggle();
@@ -432,11 +427,11 @@ export class MdCheckbox implements ControlValueAccessor, AfterViewInit, OnDestro
     return `mat-checkbox-anim-${animSuffix}`;
   }
 
-  /** Fades out the focused state ripple. */
-  private _removeFocusedRipple(): void {
-    if (this._focusedRipple) {
-      this._focusedRipple.fadeOut();
-      this._focusedRipple = null;
+  /** Fades out the focus state ripple. */
+  private _removeFocusRipple(): void {
+    if (this._focusRipple) {
+      this._focusRipple.fadeOut();
+      this._focusRipple = null;
     }
   }
 }

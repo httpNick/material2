@@ -7,7 +7,8 @@ import {
   TestBed,
   tick,
 } from '@angular/core/testing';
-import {NgModule,
+import {
+  NgModule,
   Component,
   Directive,
   ViewChild,
@@ -16,6 +17,7 @@ import {NgModule,
   Inject,
 } from '@angular/core';
 import {By} from '@angular/platform-browser';
+import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {MdDialogModule} from './index';
 import {MdDialog} from './dialog';
 import {MdDialogContainer} from './dialog-container';
@@ -124,7 +126,6 @@ describe('MdDialog', () => {
       expect(overlayContainerElement.querySelector('md-dialog-container')).toBeNull();
     });
   }));
-
 
   it('should close a dialog via the escape key', async(() => {
     dialog.open(PizzaMsg, {
@@ -272,6 +273,38 @@ describe('MdDialog', () => {
     let overlayPane = overlayContainerElement.querySelector('.cdk-overlay-pane') as HTMLElement;
 
     expect(overlayPane.style.marginRight).toBe('125px');
+  });
+
+  it('should allow for the position to be updated', () => {
+    let dialogRef = dialog.open(PizzaMsg, {
+      position: {
+        left: '250px'
+      }
+    });
+
+    viewContainerFixture.detectChanges();
+
+    let overlayPane = overlayContainerElement.querySelector('.cdk-overlay-pane') as HTMLElement;
+
+    expect(overlayPane.style.marginLeft).toBe('250px');
+
+    dialogRef.updatePosition({ left: '500px' });
+
+    expect(overlayPane.style.marginLeft).toBe('500px');
+  });
+
+  it('should allow for the dimensions to be updated', () => {
+    let dialogRef = dialog.open(PizzaMsg, { width: '100px' });
+
+    viewContainerFixture.detectChanges();
+
+    let overlayPane = overlayContainerElement.querySelector('.cdk-overlay-pane') as HTMLElement;
+
+    expect(overlayPane.style.width).toBe('100px');
+
+    dialogRef.updateSize('200px');
+
+    expect(overlayPane.style.width).toBe('200px');
   });
 
   it('should close all of the dialogs', async(() => {
@@ -450,6 +483,7 @@ describe('MdDialog', () => {
       expect(overlayContainerElement.querySelectorAll('.mat-dialog-container').length).toBe(1);
 
       (overlayContainerElement.querySelector('button[md-dialog-close]') as HTMLElement).click();
+      viewContainerFixture.detectChanges();
 
       viewContainerFixture.whenStable().then(() => {
         expect(overlayContainerElement.querySelectorAll('.mat-dialog-container').length).toBe(0);
@@ -550,6 +584,17 @@ describe('MdDialog with a parent MdDialog', () => {
             .toBe('', 'Expected closeAll on parent MdDialog to close dialog opened by child');
       });
     }));
+
+  it('should close the top dialog via the escape key', async(() => {
+    childDialog.open(PizzaMsg);
+
+    dispatchKeyboardEvent(document, 'keydown', ESCAPE);
+    fixture.detectChanges();
+
+    fixture.whenStable().then(() => {
+      expect(overlayContainerElement.querySelector('md-dialog-container')).toBeNull();
+    });
+  }));
 });
 
 
@@ -616,7 +661,7 @@ const TEST_DIRECTIVES = [
 ];
 
 @NgModule({
-  imports: [MdDialogModule],
+  imports: [MdDialogModule, NoopAnimationsModule],
   exports: TEST_DIRECTIVES,
   declarations: TEST_DIRECTIVES,
   entryComponents: [
