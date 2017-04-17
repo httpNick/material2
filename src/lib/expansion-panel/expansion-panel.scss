@@ -7,18 +7,17 @@ $mat-expansion-panel-border-radius: 2px;
 $mat-expansion-panel-width: 500px;
 $mat-expansion-panel-horizontal-padding: 24px;
 $mat-expansion-panel-vertical-padding: 12px;
+$mat-expansion-panel-expansion-content-top-padding: 4px;
+$mat-expansion-panel-footer-vert-padding: 16px;
 
 .mat-expansion-panel {
-  @include mat-elevation(2);
+  @include mat-elevation(1);
   font-family: $mat-font-family;
   width: $mat-expansion-panel-width;
   border-radius: $mat-expansion-panel-border-radius;
   display: flex;
+  flex-direction: column;
   position: relative;
-  align-items: center;
-  justify-content: space-between;
-  padding: $mat-expansion-panel-vertical-padding $mat-expansion-panel-horizontal-padding;
-
 }
 
 .mat-expansion-panel-list-content {
@@ -29,11 +28,63 @@ $mat-expansion-panel-vertical-padding: 12px;
   font-size: $mat-expansion-panel-secondary-content-font-size;
 }
 
+.mat-expansion-panel-sub-list-content {
+  font-size: $mat-expansion-panel-list-content-font-size;
+}
+
+.mat-expansion-panel-expand-icon {
+  margin-left: auto;
+}
+
+.mat-expansion-panel-expansion-content {
+  overflow: hidden;
+  padding:
+          $mat-expansion-panel-expansion-content-top-padding
+          $mat-expansion-panel-horizontal-padding
+          $mat-expansion-panel-vertical-padding + $mat-expansion-panel-expansion-content-top-padding;
+}
+
+.mat-expansion-panel-expansion-content-footer {
+  overflow: hidden;
+  border-top: {
+    width: 1px;
+    style: solid;
+  }
+  padding:
+          $mat-expansion-panel-footer-vert-padding
+          $mat-expansion-panel-horizontal-padding / 3
+          $mat-expansion-panel-footer-vert-padding
+          $mat-expansion-panel-horizontal-padding;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  button {
+    margin-left: $mat-expansion-panel-horizontal-padding / 3;
+  }
+}
+
 .expansion {
 
+  display: flex;
+
+  &.title-row {
+    align-items: center;
+    justify-content: flex-start;
+    padding: $mat-expansion-panel-vertical-padding $mat-expansion-panel-horizontal-padding;
+
+    &:focus {
+      outline: none;
+    }
+
+  }
+
   &.column {
-    display: flex;
     flex-direction: column;
+
+    &.panel-title {
+      min-width: 30%;
+    }
   }
 
 }

@@ -1,24 +1,34 @@
-import {  ModuleWithProviders, NgModule} from '@angular/core';
+import {ModuleWithProviders, NgModule} from '@angular/core';
 
 import {
   MdExpansionPanel,
   MdExpansionPanelListContent,
-  MdExpansionPanelSecondaryContent
+  MdExpansionPanelSubListContent,
+  MdExpansionPanelSecondaryContent,
+  MdExpansionPanelExpansionContent,
 } from './expansion-panel';
-import { CompatibilityModule } from '../core';
+import {CompatibilityModule} from '../core';
+import {CommonModule} from "@angular/common";
 
 @NgModule({
-  imports: [CompatibilityModule],
+  imports: [
+    CompatibilityModule,
+    CommonModule
+  ],
   exports: [
     CompatibilityModule,
     MdExpansionPanel,
     MdExpansionPanelListContent,
-    MdExpansionPanelSecondaryContent
+    MdExpansionPanelSubListContent,
+    MdExpansionPanelSecondaryContent,
+    MdExpansionPanelExpansionContent,
   ],
   declarations: [
     MdExpansionPanel,
     MdExpansionPanelListContent,
-    MdExpansionPanelSecondaryContent
+    MdExpansionPanelSubListContent,
+    MdExpansionPanelSecondaryContent,
+    MdExpansionPanelExpansionContent,
   ],
 })
 export class MdExpansionPanelModule {

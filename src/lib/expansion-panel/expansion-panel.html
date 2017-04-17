@@ -1,8 +1,18 @@
-<div class="expansion column">
-    <ng-content select="md-expansion-panel-list-content, mat-expansion-panel-list-content"></ng-content>
-    <ng-content select="md-expansion-panel-secondary-content, mat-expansion-panel-secondary-content"></ng-content>
+<div class="expansion title-row" tabindex="0" (click)="togglePanel()" (keydown.enter)="togglePanel()" [attr.aria-expanded]="openState" role="button">
+    <div class="expansion column panel-title">
+        <ng-content select="md-expansion-panel-list-content, mat-expansion-panel-list-content"></ng-content>
+        <ng-content select="md-expansion-panel-secondary-content, mat-expansion-panel-secondary-content"></ng-content>
+    </div>
+    <ng-content select="md-expansion-panel-sub-list-content, mat-expansion-panel-sub-list-content"></ng-content>
+    <svg class="mat-expansion-panel-expand-icon" [@iconRotate]="openStateValue" fill="rgba(0, 0, 0, 0.54)" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M7.41 7.84L12 12.42l4.59-4.58L18 9.25l-6 6-6-6z"/>
+        <path d="M0-.75h24v24H0z" fill="none"/>
+    </svg>
 </div>
-<svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-    <path d="M7.41 7.84L12 12.42l4.59-4.58L18 9.25l-6 6-6-6z"/>
-    <path d="M0-.75h24v24H0z" fill="none"/>
-</svg>
+<div [@contentExpand]='openStateValue' class="expansion column">
+    <ng-content select="md-expansion-panel-expansion-content, mat-expansion-panel-expansion-content"></ng-content>
+    <div *ngIf="editable" class="mat-expansion-panel-expansion-content-footer">
+        <button (click)="handleCancel()">Cancel</button>
+        <button (click)="handleSave()">Save</button>
+    </div>
+</div>
